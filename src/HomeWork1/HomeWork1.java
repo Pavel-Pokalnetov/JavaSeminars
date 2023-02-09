@@ -39,7 +39,6 @@ public class HomeWork1 {
     }
 
     public static void task2(int n) {
-
         for (int i = 1; i <= n; i++) {
             if (testPrimeNumber(i)) System.out.println(i);
         }
