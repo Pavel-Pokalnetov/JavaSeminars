@@ -72,6 +72,34 @@ public class Main {
 //        for (int i : array) {
 //            System.out.print( i + ", ");
 //        }
+        String strings[] = new String[]{
+                "кот",
+                "котик",
+                "котенок",
+                "котофей"};
 
+        int minLen = strings[0].length();
+        for (String string : strings) {
+            minLen = string.length() < minLen ? string.length() : minLen;
+        }
+        int count = 0;
+        char sym;
+        boolean flag = false;
+        for (int i = 0; i < minLen; i++) {
+            sym = strings[0].charAt(i);
+            for (int j = 1; j < strings.length; j++) {
+                if (sym != strings[j].charAt(i)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                break;
+            }
+            count++;
+        }
+        StringBuffer prefix= new StringBuffer();
+        prefix.append(strings[0],0,count);
+        System.out.println("Максимальный общий префикс: \"" + prefix + "\", длинной " + count+" символа(ов)");
     }
 }
