@@ -32,7 +32,6 @@ public class HomeWork1 {
     }
 
     static boolean testPrimeNumber(int x) {
-
         int d = 2;
         while (x % d != 0 && d < x)
             d++;
