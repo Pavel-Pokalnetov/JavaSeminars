@@ -131,7 +131,7 @@ public class HomeWork1 {
 
     }
 
-    public static void findRightExpression(String userExpr) {
+    public static void findRightExpression(String userExpr) { //на вход подаем выражение в виде "2?+65?=65"
         System.out.println(userExpr);
         String[] expr = userExpr.split("=")[0].split(" ");
         Double result = Double.parseDouble(userExpr.split("=")[1]);
