@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public class HomeWork1 {
     public static void main(String[] args) {
+/*
         // Задача 1.1
         {
             System.out.println("Задание 1");
@@ -43,13 +44,14 @@ public class HomeWork1 {
             String stringExpr = new Scanner(System.in).nextLine();
             System.out.printf("%s = %s\n", stringExpr, simpleCalc(stringExpr));
         }
-
+*/
         // Задача 4
-
-        findRightExpression("2? + ?5 = 69"); // 24 + 45
-        findRightExpression("?6 * 2?4 = 6084.0"); // 26 * 6084
-        findRightExpression("?6 * 2?4 = 6034.0"); // нет решения
-
+        findRightExpression2("2? + ?5 = 69"); // 64 + 5
+        findRightExpression2("?? + ??5 = 69"); // несколько
+        findRightExpression2("2? + 1? = 36"); // несколько решений
+        findRightExpression2("?6 * 2?4 = 6084.0"); // 26 * 234
+        findRightExpression2("?6 * ??4 = 6084.0"); // 26 * 234
+        findRightExpression2("?6 * ??4 = 6034.0"); // 26 * 234
 
 
     }
@@ -131,7 +133,7 @@ public class HomeWork1 {
 
     }
 
-    public static void findRightExpression(String userExpr) { //на вход подаем выражение в виде "2?+65?=65"
+    public static void findRightExpression(String userExpr) { //на вход подаем выражение в виде "2? + 65? = 65"
         System.out.println(userExpr);
         String[] expr = userExpr.split("=")[0].split(" ");
         Double result = Double.parseDouble(userExpr.split("=")[1]);
@@ -153,9 +155,51 @@ public class HomeWork1 {
                 }
             }
         }
-        if (counter==0) System.out.println("Решений данного выражения нет");
+        if (counter == 0) System.out.println("Решений данного выражения нет");
         System.out.println();
     }
+
+    public static void findRightExpression2(String userExpr) {
+        System.out.println("Выражение: "+userExpr);
+        String expr = userExpr.split("=")[0]; // левая часть выражения
+        Double result = Double.parseDouble(userExpr.split("=")[1]); // правая честь выражения
+        int counter = (int) expr.chars() // число знаков ?
+                .filter(c -> c == '?')
+                .count();
+        int chainLength = (int)Math.pow(10,counter); // ограничение для формирования последовательности из чисел
+        int[] indexes = new int[counter]; // индексы знаков ?
+        int temp = 0;
+        for (int i = 0; i < expr.length(); i++) { //заполняем индексы
+            if (expr.charAt(i)=='?' ){
+                indexes[temp++]=i;
+            }
+        }
+        StringBuilder testExpression = new StringBuilder(expr); //временная строка для проверки выражения
+        temp=0; // используем повторно как счетчик решений
+        for (int i = 0; i < chainLength; i++) { // формируем последовательность чисел для подстановки во врем.строку
+            String matrix = String.format(("%0"+counter+"d"),i);
+            for(int j=0;j<counter;j++) { //подстанавливаем число на нужные места в строке
+                testExpression.setCharAt(indexes[j], matrix.charAt(j));
+            }
+            //здесь выражение сформировано и можно проверять
+           if (simpleCalc(new String(testExpression))==result){
+               System.out.printf("Решение #%d: %s\n",++temp,testExpression);
+           }
+        }
+        if (temp==0){
+            System.out.println("Решений нет.");
+        }
+        System.out.println();
+    }
+
+    private static void printArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            System.out.print(i < array.length - 1 ? "," : "\n");
+        }
+    }
+
+
 }
 
 
