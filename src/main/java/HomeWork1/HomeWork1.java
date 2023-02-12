@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class HomeWork1 {
     public static void main(String[] args) {
-/*
+
         // Задача 1.1
         {
             System.out.println("Задание 1");
@@ -33,25 +33,27 @@ public class HomeWork1 {
 
         // Задача 2
         {
-            System.out.print("Поиск простых чисел от 1 до N, введите N:");
+            System.out.print("Задание 2\nПоиск простых чисел от 1 до N, введите N:");
             int n = new Scanner(System.in).nextInt();
             System.out.printf("Простые числа от 1 до %s: ", n);
             System.out.println(simpleNumber(n));
         }
         // Задача 3
         {
-            System.out.println("Введите выражение, формат:  X + Y ENTER");
+            System.out.println("Задание 3\nВведите выражение, формат:  X + Y ENTER");
             String stringExpr = new Scanner(System.in).nextLine();
             System.out.printf("%s = %s\n", stringExpr, simpleCalc(stringExpr));
         }
-*/
+
         // Задача 4
-        findRightExpression2("2? + ?5 = 69"); // 64 + 5
-        findRightExpression2("?? + ??5 = 69"); // несколько
-        findRightExpression2("2? + 1? = 36"); // несколько решений
+        System.out.println("Задание 4*");
+        findRightExpression2("20 + ?5 = 6?"); // 20 + 45 = 65
+        findRightExpression2("2? + ?5 = 69"); // 64 + 5 = 69
+        findRightExpression2("?? + ??5 = 69"); // несколько решений
+        findRightExpression2("2? + 1? = ?6"); // несколько решений
         findRightExpression2("?6 * 2?4 = 6084.0"); // 26 * 234
-        findRightExpression2("?6 * ??4 = 6084.0"); // 26 * 234
-        findRightExpression2("?6 * ??4 = 6034.0"); // 26 * 234
+        findRightExpression2("?6 * ??4 = 60?4.0"); // 26 * 234 = 6084
+        findRightExpression2("?6 * ??4 = 6034.0"); // решений нет
 
 
     }
@@ -160,33 +162,35 @@ public class HomeWork1 {
     }
 
     public static void findRightExpression2(String userExpr) {
-        System.out.println("Выражение: "+userExpr);
-        String expr = userExpr.split("=")[0]; // левая часть выражения
-        Double result = Double.parseDouble(userExpr.split("=")[1]); // правая честь выражения
-        int counter = (int) expr.chars() // число знаков ?
+        System.out.println("Выражение: " + userExpr);
+
+        int counter = (int) userExpr.chars() // число знаков ?
                 .filter(c -> c == '?')
                 .count();
-        int chainLength = (int)Math.pow(10,counter); // ограничение для формирования последовательности из чисел
+        int chainLength = (int) Math.pow(10, counter); // ограничение для формирования последовательности из чисел
         int[] indexes = new int[counter]; // индексы знаков ?
         int temp = 0;
-        for (int i = 0; i < expr.length(); i++) { //заполняем индексы
-            if (expr.charAt(i)=='?' ){
-                indexes[temp++]=i;
+        for (int i = 0; i < userExpr.length(); i++) { //заполняем индексы
+            if (userExpr.charAt(i) == '?') {
+                indexes[temp++] = i;
             }
         }
-        StringBuilder testExpression = new StringBuilder(expr); //временная строка для проверки выражения
-        temp=0; // используем повторно как счетчик решений
+        StringBuilder testExpression = new StringBuilder(userExpr); //временная строка для проверки выражения
+        temp = 0; // используем повторно как счетчик решений
+        double result;
         for (int i = 0; i < chainLength; i++) { // формируем последовательность чисел для подстановки во врем.строку
-            String matrix = String.format(("%0"+counter+"d"),i);
-            for(int j=0;j<counter;j++) { //подстанавливаем число на нужные места в строке
+            String matrix = String.format(("%0" + counter + "d"), i);
+            for (int j = 0; j < counter; j++) { //подстанавливаем число на нужные места в строке
                 testExpression.setCharAt(indexes[j], matrix.charAt(j));
             }
             //здесь выражение сформировано и можно проверять
-           if (simpleCalc(new String(testExpression))==result){
-               System.out.printf("Решение #%d: %s\n",++temp,testExpression);
-           }
+            String expr = testExpression.toString().split("=")[0]; // левая часть выражения
+            result = Double.parseDouble(testExpression.toString().split("=")[1]); // правая честь выражения
+            if (simpleCalc(expr) == result) {
+                System.out.printf("Решение #%d: %s\n", ++temp, testExpression);
+            }
         }
-        if (temp==0){
+        if (temp == 0) {
             System.out.println("Решений нет.");
         }
         System.out.println();
