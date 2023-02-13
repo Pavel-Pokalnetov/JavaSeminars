@@ -8,10 +8,10 @@ public class Main {
     public static void main(String[] args) {
 //        task1(10,'A','B');
 //        task1(11,'A','B');
-//        System.out.println( compressString("aaaasssddsdddaa"));
+        System.out.println( compressString("aaaasssddsdddaa"));
 //        System.out.println(palindrom("шалаш"));
 //        writeMyFile();
-        getMyListFiles();
+//        getMyListFiles();
     }
 
     public static void task1(int N, char c1, char c2) {
