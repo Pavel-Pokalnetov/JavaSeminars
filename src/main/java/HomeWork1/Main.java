@@ -12,7 +12,7 @@ import java.util.Scanner;
     Требуется восстановить выражение до верного равенства. Предложить хотя бы одно решение 
     или сообщить, что его нет.
  */
-public class HomeWork1 {
+public class Main {
     public static void main(String[] args) {
 
         // Задача 1.1
