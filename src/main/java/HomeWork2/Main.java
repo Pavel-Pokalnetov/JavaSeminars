@@ -2,7 +2,9 @@ package src.main.java.HomeWork2;
 
 public class Main {
     public static void main(String[] args) {
-        String testString= "     Добрый    день Как  дела     Все хорошо  ";
+//        String testString = "     Добрый    день Как  дела     Все хорошо  ";
+        String testString = "";
+
         System.out.println(testString);
         System.out.println(normaliser(testString));
     }
@@ -12,7 +14,7 @@ public class Main {
         StringBuilder workString = new StringBuilder().append(incomingString);
         int i = 1;
         while (i < workString.length()) {
-            if (workString.charAt(0)==' '){ //убираем префиксные пробелы
+            if (workString.charAt(0) == ' ') { //убираем префиксные пробелы
                 workString.deleteCharAt(0);
                 continue;
             }
@@ -27,12 +29,15 @@ public class Main {
                     break;
                 }
             }
-            if (workString.charAt(i) == ' ' && workString.charAt(i - 1) == ' ') { // убираем двойные пробелы
+            if (workString.charAt(i) == ' ' && workString.charAt(i - 1) == ' ') {
+                // убираем двойные пробелы
                 workString.deleteCharAt(i);
                 i--;
                 continue;
             }
-            if (workString.charAt(i) == ' ' && Character.isUpperCase(workString.charAt(i + 1)) && Character.isLowerCase(workString.charAt(i - 1))) {
+            if (workString.charAt(i) == ' ' &&
+                    Character.isUpperCase(workString.charAt(i + 1)) &&
+                    Character.isLowerCase(workString.charAt(i - 1))) {
                 workString.insert(i, '.'); //ставим точку в конце предложения
                 continue;
             }
