@@ -9,7 +9,6 @@ public class PhoneBook {
 
     HashMap<String, HashSet<String>> book;
 
-
     public PhoneBook() {
         book = new HashMap<>();
         this.add("admin", "100");
@@ -34,11 +33,6 @@ public class PhoneBook {
         }
         phones.add(phone);
         book.put(login, phones);
-    }
-
-    public void add(String login, ArrayList<String> phones) {
-        HashSet<String> phonesSet = new HashSet(phones);
-        System.out.println(phonesSet);
     }
 
     /**
@@ -70,13 +64,13 @@ public class PhoneBook {
         if (book.get(login) == null) {
             return null;
         }
-        return new ArrayList(book.get(login));
+        return new ArrayList<>(book.get(login));
     }
 
     /**
      * Удаление номера из всей книги (сквозной поиск)
      *
-     * @param phone
+     * @param phone - номер для удаления
      */
     public void remove_phone(String phone) {
         ArrayList<String> logins = this.get_logins(phone);
@@ -89,14 +83,16 @@ public class PhoneBook {
     /**
      * Удаление записи по логину
      *
-     * @param login
+     * @param login - удаляемый логин
      */
     public void remove_login(String login) {
         book.remove(login);
     }
 
-    /** Замена старого номера на новый
-     * @param login - выбранный логин
+    /**
+     * Замена старого номера на новый
+     *
+     * @param login     - выбранный логин
      * @param new_phone - новый номер
      * @param old_phone - старый (удаляемый)
      */
@@ -110,12 +106,11 @@ public class PhoneBook {
         this.clean();
     }
 
-
     /**
      * Очистка книги от пустых записей (не содержащих номеров)
      */
     private void clean() {
-        ArrayList<String> logins = new ArrayList(book.keySet());
+        ArrayList<String> logins = new ArrayList<>(book.keySet());
         for (String login : logins) {
             if (book.get(login).isEmpty()) {
                 book.remove(login);
