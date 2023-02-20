@@ -36,7 +36,7 @@ public class PhoneBook {
         book.put(login, phones);
     }
 
-    public void add(String login, ArrayList<String> phones){
+    public void add(String login, ArrayList<String> phones) {
         HashSet<String> phonesSet = new HashSet(phones);
         System.out.println(phonesSet);
     }
@@ -95,6 +95,11 @@ public class PhoneBook {
         book.remove(login);
     }
 
+    /** Замена старого номера на новый
+     * @param login - выбранный логин
+     * @param new_phone - новый номер
+     * @param old_phone - старый (удаляемый)
+     */
     public void replace_phone_from_login(String login, String new_phone, String old_phone) {
         HashSet<String> phones = book.get(login);
         if (phones != null) {
@@ -125,28 +130,31 @@ public class PhoneBook {
 
         int n = 1;
         for (String login : book.keySet()) {
-            System.out.printf("%d. %s: ",n,login);
+            System.out.printf("%d. %s: ", n, login);
             System.out.println(this.find_phone(login));
             n++;
         }
     }
 
-    public String get_json(){
-        StringBuilder json = new StringBuilder("{\"phonebook\":{\n");
-        int count_login=0, count_phone = 0;
+    /**
+     * Возвращает JSON всей тел.книги
+     */
+    public String get_json() {
+        StringBuilder json = new StringBuilder("{\n");
+        int count_login = 0, count_phone = 0;
         for (String login : book.keySet()) {
-            json.append(String.format("\"%d\":{\n\"login\":\"%s\",\n\"phone\":{\n",count_login,login));
-            for (String phone:this.find_phone(login)) {
-                json.append(String.format("\"%d\":\"%s\",\n",count_phone,phone));
+            json.append(String.format("\"%d\":{\n\"login\":\"%s\",\n\"phone\":{\n", count_login, login));
+            for (String phone : this.find_phone(login)) {
+                json.append(String.format("\"%d\":\"%s\",\n", count_phone, phone));
                 count_phone++;
             }
             count_login++;
-            json.deleteCharAt(json.length()-2);
+            json.deleteCharAt(json.length() - 2);
             json.append("}},\n");
-            count_phone=0;
+            count_phone = 0;
         }
-        json.deleteCharAt(json.length()-2);
-        json.append("}}");
+        json.deleteCharAt(json.length() - 2);
+        json.append("}");
         return json.toString();
     }
 
