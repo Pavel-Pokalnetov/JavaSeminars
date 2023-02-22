@@ -11,11 +11,7 @@ public class PhoneBook {
 
     public PhoneBook() {
         book = new HashMap<>();
-        this.add("admin", "100");
-        this.add("modrator", "200");
-        this.add("superadmin", "000");
-        this.add("user1", "325");
-        this.add("user2", "345");
+
     }
 
     /**
@@ -157,6 +153,11 @@ public class PhoneBook {
         PhoneBook phoneBook = new PhoneBook();
         phoneBook.add("admin", "999");
         phoneBook.add("admin", "9991");
+        phoneBook.add("admin", "100");
+        phoneBook.add("modrator", "200");
+        phoneBook.add("superadmin", "000");
+        phoneBook.add("user1", "325");
+        phoneBook.add("user2", "345");
         phoneBook.replace_phone_from_login("admin", "9990", "999");
         System.out.println(phoneBook.get_json());
 
