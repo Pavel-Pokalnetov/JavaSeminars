@@ -3,7 +3,6 @@ package HomeWork4;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class PhoneBook {
 
@@ -147,6 +146,10 @@ public class PhoneBook {
         json.deleteCharAt(json.length() - 2);
         json.append("}");
         return json.toString();
+    }
+
+    public static ArrayList<String> get_All_logins() {
+        return new ArrayList<>(book.keySet());
     }
 
     public static void main(String[] args) {
