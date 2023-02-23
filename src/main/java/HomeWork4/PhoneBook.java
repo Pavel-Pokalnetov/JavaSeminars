@@ -157,20 +157,20 @@ public class PhoneBook {
         this.add("admin", "1002");
         this.add("modrator", "2000");
         this.add("superadmin", "0000");
-        this.add("user1", "3125");
-        this.add("user2", "3245");
+        this.add("user1", "3-12-45");
+        this.add("user2", "3-24-05");
     }
 
-    public static void main(String[] args) {
-        PhoneBook phoneBook = new PhoneBook();
-        phoneBook.add("admin", "999");
-        phoneBook.add("admin", "9991");
-        phoneBook.add("admin", "100");
-        phoneBook.add("modrator", "200");
-        phoneBook.add("superadmin", "000");
-        phoneBook.add("user1", "325");
-        phoneBook.add("user2", "345");
-        System.out.println(phoneBook.get_json());
-
-    }
+//    public static void main(String[] args) {
+//        PhoneBook phoneBook = new PhoneBook();
+//        phoneBook.add("admin", "999");
+//        phoneBook.add("admin", "9991");
+//        phoneBook.add("admin", "100");
+//        phoneBook.add("modrator", "200");
+//        phoneBook.add("superadmin", "000");
+//        phoneBook.add("user1", "325");
+//        phoneBook.add("user2", "345");
+//        System.out.println(phoneBook.get_json());
+//
+//    }
 }
