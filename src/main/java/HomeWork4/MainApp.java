@@ -20,7 +20,7 @@ public class MainApp {
         menu.add("6", "Удаление номера");
         menu.add("7", "Удаление записи по логину");
         menu.add("8", "Импорт/Экспорт");
-        menu.add("9", "Выход");
+        menu.add("Q", "Выход");
         while (true) {
             switch (menu.run()) {
                 case "1":
