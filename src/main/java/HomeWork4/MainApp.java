@@ -1,15 +1,17 @@
 package HomeWork4;
 
+import static HomeWork4.ImportExport.pBimport;
+
 public class MainApp {
     public static PhoneBook phoneBook;
 
     public static void main(String[] args) {
         phoneBook = new PhoneBook();
-        phoneBook.testload();
-        mainLoop();
+        pBimport(phoneBook); // если есть файл phonеbook.json то подгрузим из него данные
+        mainMenuLoop();
     }
 
-    private static void mainLoop() {
+    private static void mainMenuLoop() {
         // главное меню
         Menu menu = new Menu();
         menu.add("1", "Добавить запись");
@@ -47,9 +49,11 @@ public class MainApp {
                 case "8":
                     Actions.import_export(phoneBook);
                     break;
-                case "9":
+                case "Q":
+                    System.out.println("Удачи!");
                     return;
             }
+            System.out.println();
         }
     }
 

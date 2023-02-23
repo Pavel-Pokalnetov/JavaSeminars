@@ -1,12 +1,23 @@
 package HomeWork4;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import java.io.*;
+import com.owlike.genson.Genson;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ImportExport {
 
+    /**
+     * Экспорт записей книги в формат JSON в файл phonebook.json
+     *
+     * @param phoneBook
+     */
     static void pBexport(PhoneBook phoneBook) {
         String json = phoneBook.get_json();
         File jsonFile = new File("phonebook.json");
@@ -17,38 +28,33 @@ public class ImportExport {
         }
     }
 
+    /**
+     * Импорт данных из файла JSON phonebook.json
+     *
+     * @param phoneBook
+     */
     static void pBimport(PhoneBook phoneBook) {
-        class PhoneBookRecord {
-            private String login;
-            private String[] phones;
-
-            public void setLogin(String login) {
-                this.login = login;
-            }
-
-            public void setPhones(String[] phones) {
-                this.phones = phones;
-            }
+        class Phones extends HashMap {
         }
-        PhoneBook newPhoneBook = new PhoneBook();
-        InputStream input = null;
+        String jsonStringForMap = null;
         try {
-            input = new FileInputStream("phonebook.json");
-        } catch (FileNotFoundException e) {
-            System.out.println("файл phonebook.json не найден");
+            jsonStringForMap = new String(Files.readAllBytes(Paths.get("phonebook.json")));
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения файла phonebook.json");
+            e.printStackTrace();
             return;
         }
-        JsonReader reader = Json.createReader(input);
-        JsonObject rootJSON = reader.readObject();
-        reader.close();
-        JsonObject pbJSON = rootJSON.getJsonObject("phonebook");
-        System.out.println(pbJSON.toString());
 
-    }
+        Genson genson = new Genson();
+        Map<String, Phones> jsonRead = genson.deserialize(jsonStringForMap, Map.class);
+        phoneBook.reset();
 
-    public static void main(String[] args) {
-        PhoneBook pb = new PhoneBook();
-        pb.testload();
-        pBexport(pb);
+        List<String> phNumbers;
+        for (String login : jsonRead.keySet()) {
+            phNumbers = (List<String>) ((Map) jsonRead.get(login)).get("phone");
+            for (String phNumber : phNumbers) {
+                phoneBook.add(login, phNumber);
+            }
+        }
     }
 }

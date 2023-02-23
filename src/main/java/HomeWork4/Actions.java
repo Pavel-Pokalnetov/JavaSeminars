@@ -1,6 +1,5 @@
 package HomeWork4;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Actions {
@@ -50,6 +49,9 @@ public class Actions {
         System.out.println(phoneBook.find_phone(login));
     }
 
+    /**
+     * @param phoneBook
+     */
     public static void remove_numbers(PhoneBook phoneBook) {
         System.out.println("Удаление номера телефона");
         System.out.print("Введите номер телефона:");
@@ -57,6 +59,11 @@ public class Actions {
         phoneBook.remove_phone(phone);
     }
 
+    /**
+     * Удаление записи телефонной книги по логину
+     *
+     * @param phoneBook
+     */
     public static void remove_login(PhoneBook phoneBook) {
         System.out.println("Удаление записи по логину");
         System.out.print("Введите логин:");
@@ -64,6 +71,11 @@ public class Actions {
         phoneBook.remove_login(login);
     }
 
+    /**
+     * Вложенное меню Импорта/Экспорта
+     *
+     * @param phoneBook
+     */
     public static void import_export(PhoneBook phoneBook) {
         Menu menuExportImport = new Menu();
         menuExportImport.add("1", "Экспорт в JSON");
@@ -80,17 +92,19 @@ public class Actions {
                 case "Q":
                     return;
             }
+            System.out.println();
         }
     }
 
 
+    /**
+     * Вывод всех записей телефонной книги к консоль
+     *
+     * @param phoneBook
+     */
     public static void view_all(PhoneBook phoneBook) {
-        ArrayList<String> logins = PhoneBook.get_All_logins(phoneBook.book);
-        for (String login : logins) {
-            System.out.println(login);
-            for (String phone : phoneBook.find_phone(login)) {
-                System.out.printf("\t%s\n", phone);
-            }
-        }
+        System.out.println("Все записи: ");
+        phoneBook.print();
+        System.out.println();
     }
 }

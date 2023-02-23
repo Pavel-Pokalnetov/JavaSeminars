@@ -28,21 +28,31 @@ public class Menu {
         menu_list = new HashMap<>();
     }
 
+    /**
+     * Вывод меню в консоль
+     */
     public void print() {
         ArrayList<String> menu_items = new ArrayList<String>(menu_list.keySet());
         Collections.sort(menu_items);
+        System.out.println("Выберите действие");
         for (String a : menu_items) {
-            System.out.printf("%3s - %s\n", a, menu_list.get(a));
+            System.out.printf("%4s - %s\n", a, menu_list.get(a));
         }
 
     }
 
+    /**
+     * Основной цикл меню. Вывод списка пунктов в консоль, ожидание ответа пользователя, проверка ответа.
+     *
+     * @return - возврат выбранного значения меню (String)
+     */
     public String run() {
         String key;
         while (true) {
             this.print();
-            System.out.print("  >:");
+            System.out.print(" :_ ");
             key = Actions.input();
+            System.out.println();
             if (menu_list.get(key) != null) {
                 // сработал пункт меню
                 return key;

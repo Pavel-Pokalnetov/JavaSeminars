@@ -9,7 +9,7 @@ public class PhoneBook {
     HashMap<String, HashSet<String>> book;
 
     public PhoneBook() {
-        book = new HashMap<>();
+        this.reset();
 
     }
 
@@ -64,6 +64,7 @@ public class PhoneBook {
 
     /**
      * Удаление номера из всей книги (сквозной поиск)
+     * если запись не содержит номеров, то запись удаляется
      *
      * @param phone - номер для удаления
      */
@@ -82,6 +83,7 @@ public class PhoneBook {
      */
     public void remove_login(String login) {
         book.remove(login);
+        System.out.printf("Запись [%s] удалена\n", login);
     }
 
     /**
@@ -98,23 +100,21 @@ public class PhoneBook {
             phones.add(new_phone);
             book.put(login, phones);
         }
-        this.clean();
     }
 
     /**
      * Очистка книги от пустых записей (не содержащих номеров)
      */
     private void clean() {
-        ArrayList<String> logins = new ArrayList<>(book.keySet());
-        for (String login : logins) {
+        for (String login : book.keySet()) {
             if (book.get(login).isEmpty()) {
-                book.remove(login);
+                this.remove_login(login);
             }
         }
     }
 
     /**
-     * Печать книги (для отладки)
+     * Печать книги
      */
     public void print() {
         int n = 1;
@@ -143,30 +143,33 @@ public class PhoneBook {
         return json.toString();
     }
 
-    public static ArrayList<String> get_All_logins(HashMap<String, HashSet<String>> book) {
+    /**
+     * Получить список всех login в книге
+     *
+     * @param book
+     * @return
+     */
+    public ArrayList<String> get_All_logins(HashMap<String, HashSet<String>> book) {
         return new ArrayList<>(book.keySet());
     }
 
-    public void testload() {
-        this.add("admin", "1000");
-        this.add("admin", "1001");
-        this.add("admin", "1002");
-        this.add("modrator", "2000");
-        this.add("superadmin", "0000");
-        this.add("user1", "3-12-45");
-        this.add("user2", "3-24-05");
+    /**
+     * Очистка всей книги от данных
+     */
+    public void reset() {
+        book = new HashMap<>();
     }
 
-//    public static void main(String[] args) {
-//        PhoneBook phoneBook = new PhoneBook();
-//        phoneBook.add("admin", "999");
-//        phoneBook.add("admin", "9991");
-//        phoneBook.add("admin", "100");
-//        phoneBook.add("modrator", "200");
-//        phoneBook.add("superadmin", "000");
-//        phoneBook.add("user1", "325");
-//        phoneBook.add("user2", "345");
-//        System.out.println(phoneBook.get_json());
-//
+//    /**
+//     * Тестовая загругка номеров в книгу
+//     */
+//    public void testload() {
+//        this.add("admin", "1000");
+//        this.add("admin", "1001");
+//        this.add("admin", "1002");
+//        this.add("moderator", "2000");
+//        this.add("superadmin", "0000");
+//        this.add("user1", "3-12-45");
+//        this.add("user2", "3-24-05");
 //    }
 }
