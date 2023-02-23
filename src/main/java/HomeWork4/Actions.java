@@ -23,17 +23,17 @@ public class Actions {
     }
 
     public static void find_login(PhoneBook phoneBook) {
+        System.out.println("Поиск логина по номеру телефона");
+        System.out.print("Введите номер:");
+        String phone = input();
+        System.out.println(phoneBook.find_login(phone));
+    }
+
+    public static void find_phones(PhoneBook phoneBook) {
         System.out.println("Поиск номеров по логину");
         System.out.print("Введите логин:");
         String login = input();
         System.out.println(phoneBook.find_phone(login));
-    }
-
-    public static void find_phones(PhoneBook phoneBook) {
-        System.out.println("Поиск логина по номеру телефона");
-        System.out.print("Введите номер телефона:");
-        String phone = input();
-        System.out.println(phoneBook.get_logins(phone));
     }
 
 
@@ -66,16 +66,32 @@ public class Actions {
 
     public static void import_export(PhoneBook phoneBook) {
         System.out.println("Этот функционал пока в разработке");
+        Menu menuExportImport = new Menu();
+        menuExportImport.add("1", "Экспорт в JSON");
+        menuExportImport.add("2", "Импорт из JSON");
+        menuExportImport.add("9", "Выход");
+        while (true) {
+            switch (menuExportImport.run()) {
+                case "1":
+                    ImportExport.pBexport(phoneBook);
+                    return;
+                case "2":
+                    ImportExport.pBimport(phoneBook);
+                    return;
+                case "9":
+                    return;
+            }
+        }
     }
 
+
     public static void view_all(PhoneBook phoneBook) {
-        ArrayList<String> logins = PhoneBook.get_All_logins();
+        ArrayList<String> logins = PhoneBook.get_All_logins(phoneBook.book);
         for (String login : logins) {
             System.out.println(login);
-            System.out.println(phoneBook.find_phone(login));
-            ;
-
+            for (String phone : phoneBook.find_phone(login)) {
+                System.out.printf("\t%s\n", phone);
+            }
         }
-
     }
 }

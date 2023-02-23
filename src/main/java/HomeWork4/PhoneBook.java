@@ -36,7 +36,7 @@ public class PhoneBook {
      * @param phone (String) - номер телефона для поиска логина
      * @return (String) - найденный логин, либо null
      */
-    public ArrayList<String> get_logins(String phone) {
+    public ArrayList<String> find_login(String phone) {
         HashSet<String> phones;
         ArrayList<String> logins = new ArrayList<>();
         for (String login : book.keySet()) {
@@ -52,7 +52,7 @@ public class PhoneBook {
      * Получить список номеров телефонов по введенному логину
      *
      * @param login - логин для получения списка телефонов
-     * @return -  список телефонов с разделителем \n
+     * @return - список телефонов с разделителем \n
      */
     public ArrayList<String> find_phone(String login) {
         // полу
@@ -68,7 +68,7 @@ public class PhoneBook {
      * @param phone - номер для удаления
      */
     public void remove_phone(String phone) {
-        ArrayList<String> logins = this.get_logins(phone);
+        ArrayList<String> logins = this.find_login(phone);
         for (String login : logins) {
             book.get(login).remove(phone);
         }
@@ -117,7 +117,6 @@ public class PhoneBook {
      * Печать книги (для отладки)
      */
     public void print() {
-
         int n = 1;
         for (String login : book.keySet()) {
             System.out.printf("%d. %s: ", n, login);
@@ -148,8 +147,18 @@ public class PhoneBook {
         return json.toString();
     }
 
-    public static ArrayList<String> get_All_logins() {
+    public static ArrayList<String> get_All_logins(HashMap<String, HashSet<String>> book) {
         return new ArrayList<>(book.keySet());
+    }
+
+    public void testload() {
+        this.add("admin", "1000");
+        this.add("admin", "1001");
+        this.add("admin", "1002");
+        this.add("modrator", "2000");
+        this.add("superadmin", "0000");
+        this.add("user1", "3125");
+        this.add("user2", "3245");
     }
 
     public static void main(String[] args) {
@@ -161,7 +170,6 @@ public class PhoneBook {
         phoneBook.add("superadmin", "000");
         phoneBook.add("user1", "325");
         phoneBook.add("user2", "345");
-        phoneBook.replace_phone_from_login("admin", "9990", "999");
         System.out.println(phoneBook.get_json());
 
     }

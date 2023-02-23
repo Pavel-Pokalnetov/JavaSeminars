@@ -5,6 +5,7 @@ public class MainApp {
 
     public static void main(String[] args) {
         phoneBook = new PhoneBook();
+        phoneBook.testload();
         mainLoop();
     }
 
@@ -27,6 +28,7 @@ public class MainApp {
                     break;
                 case "2":
                     Actions.view_all(phoneBook);
+                    break;
                 case "3":
                     Actions.find_login(phoneBook);
                     break;
