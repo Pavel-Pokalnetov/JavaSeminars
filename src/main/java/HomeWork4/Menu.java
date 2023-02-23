@@ -1,5 +1,7 @@
 package HomeWork4;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Menu {
@@ -27,7 +29,9 @@ public class Menu {
     }
 
     public void print() {
-        for (String a : menu_list.keySet()) {
+        ArrayList<String> menu_items = new ArrayList<String>(menu_list.keySet());
+        Collections.sort(menu_items);
+        for (String a : menu_items) {
             System.out.printf("%3s - %s\n", a, menu_list.get(a));
         }
 
