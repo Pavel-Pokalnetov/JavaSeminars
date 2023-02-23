@@ -130,17 +130,13 @@ public class PhoneBook {
      */
     public String get_json() {
         StringBuilder json = new StringBuilder("{\n");
-        int count_login = 0, count_phone = 0;
         for (String login : book.keySet()) {
-            json.append(String.format("\"%d\":{\n\"login\":\"%s\",\n\"phone\":{\n", count_login, login));
+            json.append(String.format("\"%s\":{\"phone\":[", login));
             for (String phone : this.find_phone(login)) {
-                json.append(String.format("\"%d\":\"%s\",\n", count_phone, phone));
-                count_phone++;
+                json.append(String.format("\"%s\",", phone));
             }
-            count_login++;
-            json.deleteCharAt(json.length() - 2);
-            json.append("}},\n");
-            count_phone = 0;
+            json.deleteCharAt(json.length() - 1);
+            json.append("]},\n");
         }
         json.deleteCharAt(json.length() - 2);
         json.append("}");

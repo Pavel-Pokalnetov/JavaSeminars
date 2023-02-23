@@ -68,7 +68,7 @@ public class Actions {
         Menu menuExportImport = new Menu();
         menuExportImport.add("1", "Экспорт в JSON");
         menuExportImport.add("2", "Импорт из JSON");
-        menuExportImport.add("9", "Выход");
+        menuExportImport.add("Q", "Выход");
         while (true) {
             switch (menuExportImport.run()) {
                 case "1":
