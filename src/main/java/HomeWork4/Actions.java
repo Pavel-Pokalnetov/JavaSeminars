@@ -65,7 +65,6 @@ public class Actions {
     }
 
     public static void import_export(PhoneBook phoneBook) {
-        System.out.println("Этот функционал пока в разработке");
         Menu menuExportImport = new Menu();
         menuExportImport.add("1", "Экспорт в JSON");
         menuExportImport.add("2", "Импорт из JSON");
@@ -74,11 +73,11 @@ public class Actions {
             switch (menuExportImport.run()) {
                 case "1":
                     ImportExport.pBexport(phoneBook);
-                    return;
+                    break;
                 case "2":
                     ImportExport.pBimport(phoneBook);
-                    return;
-                case "9":
+                    break;
+                case "Q":
                     return;
             }
         }
