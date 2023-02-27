@@ -1,10 +1,9 @@
 package HomeWork5;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
+
 
 /*
 * Учитывая два целочисленных массива nums1 и nums2, верните максимальную длину подмассива, который появляется в обоих массивах.
@@ -22,11 +21,11 @@ Explanation: Повторяющийся подмассив с максималь
 * */
 public class Main {
     public static void main(String[] args) {
-        task1();
-        task2();
+        example1();
+        example2();
     }
 
-    private static void task1() {
+    private static void example1() {
         int[] nums1 = {1, 2, 3, 2, 1};
         int[] nums2 = {3, 2, 1, 4, 7};
         System.out.println(Arrays.toString(nums1));
@@ -35,9 +34,9 @@ public class Main {
         System.out.println();
     }
 
-    private static void task2() {
-        int[] nums1 = new int[]{0, 0, 0, 0, 0, 0};
-        int[] nums2 = new int[]{9, 0, 1, 0, 2, 1};
+    private static void example2() {
+        int[] nums1 = new int[]{0, 1, 0, 2, 0, 0};
+        int[] nums2 = new int[]{0, 2, 0, 1, 0, 0};
         System.out.println(Arrays.toString(nums1));
         System.out.println(Arrays.toString(nums2));
         findMaxSubArray(nums1, nums2);
@@ -45,7 +44,7 @@ public class Main {
     }
 //==========================================================================
 
-    /**
+    /** 
      * @param nums1 - первый массивов
      * @param nums2 - второй массивов
      * @return -  подмассив максимального размера
@@ -61,20 +60,22 @@ public class Main {
                 max = item.size();
             }
         }
+
+        if (max == 0) {// выходим если нет повторяющихся массивов
+            System.out.println("Нет повторяющихся подмассивов");
+            return;
+        }
+        System.out.printf("Максимальный размер повторяющегося подмассива: %d\n",max);
         ArrayList<ArrayList<Integer>> resultArrays = new ArrayList<>();
         for (ArrayList<Integer> item : tempSet2) { // сохраняем найденные подмассивы с список
             if (max == item.size()) {
                 resultArrays.add(item);
             }
         }
-        if (resultArrays.size()==0){
-            System.out.println("Нет повторяющихся подмассивов");
-            return;
-        }
         if (resultArrays.size() > 1) {
-            System.out.println("Найдено несколько подмассивов максимального размера: ");
+            System.out.print("Найдено несколько подмассивов максимального размера: ");
         } else {
-            System.out.println("Подмассив максимального размера равен: ");
+            System.out.print("Подмассив максимального размера равен: ");
         }
         System.out.println(resultArrays);
     }
@@ -94,9 +95,7 @@ public class Main {
                     if (j >= array.length) break;
                     tempArray.add(array[j]);
                 }
-                if (tempArray.size() >= 2) {
                     tempSet.add(tempArray);
-                }
             }
         }
         return tempSet;
