@@ -35,8 +35,8 @@ public class Main {
     }
 
     private static void example2() {
-        int[] nums1 = new int[]{0, 1, 0, 2, 0, 0};
-        int[] nums2 = new int[]{0, 2, 0, 1, 0, 0};
+        int[] nums1 = new int[]{0, 0, 0, 0, 0, 0};
+        int[] nums2 = new int[]{0, 0, 0, 0, 0, 0};
         System.out.println(Arrays.toString(nums1));
         System.out.println(Arrays.toString(nums2));
         findMaxSubArray(nums1, nums2);
@@ -44,7 +44,7 @@ public class Main {
     }
 //==========================================================================
 
-    /** 
+    /**
      * @param nums1 - первый массивов
      * @param nums2 - второй массивов
      * @return -  подмассив максимального размера
@@ -65,7 +65,7 @@ public class Main {
             System.out.println("Нет повторяющихся подмассивов");
             return;
         }
-        System.out.printf("Максимальный размер повторяющегося подмассива: %d\n",max);
+        System.out.printf("Максимальный размер повторяющегося подмассива: %d\n", max);
         ArrayList<ArrayList<Integer>> resultArrays = new ArrayList<>();
         for (ArrayList<Integer> item : tempSet2) { // сохраняем найденные подмассивы с список
             if (max == item.size()) {
@@ -95,7 +95,7 @@ public class Main {
                     if (j >= array.length) break;
                     tempArray.add(array[j]);
                 }
-                    tempSet.add(tempArray);
+                tempSet.add(tempArray);
             }
         }
         return tempSet;
