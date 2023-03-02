@@ -11,15 +11,15 @@ import java.util.List;
     */
 public class Main {
     public static void main(String[] args) {
-        TreeNode tNode = new TreeNode(1,
-                new TreeNode(),
-                new TreeNode(2,
-                        new TreeNode(),
-                        new TreeNode(3)));
-
+        task1();
     }
 
-    public List<Integer> preorderTraversal(TreeNode root) {
+    private static void task1() {
+        TreeNode tNode = new TreeNode(1,null, new TreeNode(2,null,new TreeNode(3)));
+        System.out.println(preorderTraversal(tNode));
+    }
+
+    public static List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root != null) {
             list.add(root.val);
@@ -29,16 +29,14 @@ public class Main {
         return list;
     }
 
-    public void fillTree(TreeNode root,Integer in){
-        if (root==null){
-            root.val=in;
-            return;
-        }else if (root.left==null){
-            fillTree(root.left,in);
-        }else{
-            fillTree(root.right,in);
+    public void fillTree(TreeNode root, Integer in) {
+        if (root == null) {
+            root.val = in;
+        } else if (root.left == null) {
+            fillTree(root.left, in);
+        } else {
+            fillTree(root.right, in);
         }
-        return;
     }
 
 }
